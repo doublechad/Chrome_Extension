@@ -3,7 +3,7 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender, sendRespo
     console.log(request)
     switch(request.type) {
        case 'MsgFromPage':
-          createdZentaoCard(sender, sendResponse);
+          createdZentaoCard(request, sendResponse);
           break;
     }
 
@@ -23,10 +23,11 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender, sendRespo
 
   
 
-  function createdZentaoCard(sender, sendResponse){
-    console.log(`it's from ${sender.tab.index}`);
+  function createdZentaoCard(request, sendResponse){
+    console.log(request);
+
     let xhr =new XMLHttpRequest();
-    xhr.open("POST","http://localhost/zentao/task-create-2--0.html");
+    xhr.open("POST","http://192.168.1.147/zentao/task-create-1.html");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {    
       if(xhr.readyState == 4 && xhr.status == 200) {
@@ -67,7 +68,7 @@ chrome.runtime.onMessageExternal.addListener(function(request, sender, sendRespo
   function getZendaoCookie(){
     var xhr = new XMLHttpRequest();
     xhr.withCredentials = true;
-    xhr.open("POST", 'http://localhost/zentao/user-login.html', true);
+    xhr.open("POST", 'http://192.168.1.147/zentao/user-login.html', true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     var result = new Promise((resolve,reject)=>{
       xhr.onreadystatechange = function() {    

@@ -10,9 +10,11 @@ window.onload=function(){
 
 function tobackground(){
     var targetExtensionId = "dmfafmobagdhmlnchikglfhkjmmbinci"; // 插件的ID
+
     chrome.runtime.sendMessage(targetExtensionId, {type: 'MsgFromPage', msg: 'Hello, I am page~'}, function(response) {
     console.log(response);
 });
+
 }
 
 (function() {
@@ -36,7 +38,13 @@ function tobackground(){
             /* URL           */ this._url
             /* Response body */ this.responseText
             /* Request body  */ postData
-            console.log(this._url,this.responseText);
+            var response ={
+                "method":this._method,
+                "url":this._url,
+                "responseText":this.responseText,
+                "postData":postData
+            };
+            console.log(response);
         });
         return send.apply(this, arguments);
     };
