@@ -2,7 +2,9 @@ window.onload=function(){
     var target =document.getElementsByClassName('window')[0];
     var button =document.createElement('button');
     button.innerHTML="擴展測試";
-    target.appendChild(button);
+    if(target){
+        target.appendChild(button);
+    }
     button.addEventListener("click",tobackground);
 }
 
@@ -39,5 +41,6 @@ function tobackground(){
         return send.apply(this, arguments);
     };
 })();
+
 
  
